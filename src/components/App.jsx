@@ -19,17 +19,16 @@ class App extends Component {
   addContact = ({ name, number }) => {
     const normalizedName = name.toLowerCase();
 
-    let isAdded = false;
-    this.state.contacts.forEach(el => {
-      if (el.name.toLowerCase() === normalizedName) {
-        alert(`${name} is already in contacts`);
-        isAdded = true;
-      }
+    const isAdded = this.state.contacts.find(el => {
+      return el.name.toLowerCase() === normalizedName
     });
 
+
     if (isAdded) {
+      alert(`${name} is already in contacts`);
       return;
     }
+
     const contact = {
       id: shortid.generate(),
       name: name,
@@ -66,13 +65,11 @@ class App extends Component {
     return (
       <div
         style={{
-          // height: '100vh',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
           fontSize: 18,
-          // textTransform: 'uppercase',
           color: '#010101',
         }}
       >
